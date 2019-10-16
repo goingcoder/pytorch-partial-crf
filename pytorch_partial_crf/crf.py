@@ -81,7 +81,6 @@ class CRF(BaseCRF):
 
         # Start transition score and first emission
         score = self.start_transitions.index_select(0, tags[0])
-        
         for i in range(sequence_length - 1):
             current_tag, next_tag = tags[i], tags[i+1]
             # Emissions score for next tag
@@ -104,5 +103,4 @@ class CRF(BaseCRF):
         last_input_score = last_input_score.squeeze()                    # (batch_size,)
 
         score = score + last_transition_score + last_input_score * mask[-1]
-
         return score
