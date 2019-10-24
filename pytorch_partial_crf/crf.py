@@ -87,7 +87,6 @@ class CRF(BaseCRF):
             emissions_score = emissions[i].gather(1, current_tag.view(batch_size, 1)).squeeze(1)
             # Transition score from current_tag to next_tag
             transition_score = self.transitions[current_tag.view(-1), next_tag.view(-1)]
-
             # Add all score
             score += transition_score * mask[i + 1] + emissions_score * mask[i]
 
